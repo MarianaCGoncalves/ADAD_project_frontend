@@ -6,20 +6,21 @@ import Button from 'react-bootstrap/Button';
 
 export default function App() {
     let [users, setUsers] = useState([]);
-    let [page, setPage] = useState([1]);
-    let [totalPgs, setTpgs] = useState([]);
+    let [page, setPage] = useState(1);
+    let [totalPgs, setTpgs] = useState(0);
 
-    const getUsers = async () => {
+    const getUsers = async (pgAtual) => {
       try {
-        const response = await fetch('http://localhost:3000/users', {
+        const response = await fetch('http://localhost:3000/users?page=${pgAtual}', {
           method: 'GET',
           headers: {
           'Content-Type': 'application/json'
           },
         });
-        
+        console.log('pgatual:', pgAtual)
+
         const data = await response.json();
-        console.log(data)
+        console.log('dados:', data)
         setUsers(data.users);
         setTpgs(data.pages.total);
 
@@ -30,6 +31,7 @@ export default function App() {
 
 
     useEffect(() => {
+      console.log(`Página: ${page}`);
       getUsers(page);
     }, [page]);
 
