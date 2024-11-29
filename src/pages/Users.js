@@ -11,7 +11,7 @@ export default function App() {
 
     const getUsers = async (pgAtual) => {
       try {
-        const response = await fetch('http://localhost:3000/users?page=${pgAtual}', {
+        const response = await fetch(`http://localhost:3000/users?page=${pgAtual}`, {
           method: 'GET',
           headers: {
           'Content-Type': 'application/json'
