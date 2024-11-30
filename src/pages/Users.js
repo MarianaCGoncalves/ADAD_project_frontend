@@ -11,7 +11,7 @@ export default function App() {
 
     const getUsers = async (page) => {
       try {
-        const response = await fetch('http://localhost:3000/users?page=${page}', {
+        const response = await fetch(`http://localhost:3000/users?page=${page}`, {
           method: 'GET',
           headers: {
           'Content-Type': 'application/json'
