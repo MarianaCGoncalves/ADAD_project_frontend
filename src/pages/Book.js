@@ -16,17 +16,22 @@ export default function App() {
  
 
   useEffect(() => {
-    let id = params.id;
+    let id = params._id;
     console.log(id);
-    //getBook(params.id);
+    const getBook = async (id) => { 
+      try { const response = await fetch(`http://localhost:3000/book/id/${id}`); 
+            const data = await response.json
+    } catch (error){
+      console.error('Error:', error);
+    }
+  }
+    getBook(params._id);
 
-  }, []);
+  }, [params._id]);
 
   return (
     <div className="container pt-5 pb-5">
       <h2>Book page</h2>
-      <p>use /book/:id endpoint</p>
-
       
     </div>
   )
