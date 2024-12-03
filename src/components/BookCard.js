@@ -13,10 +13,8 @@ function BookCard(props) {
         <Card.Text>Page Count: {props.pageCount}</Card.Text>
         <h4 class= 'text-center'>{props.price+'€'}</h4>
         <div class="col-md-12 text-center">
-        <Button href={"/book/" + props._id} variant="outline-primary" class="text-center">Open Book</Button>
-            
+        <Button href={`http://localhost:3000/books/id/${props._id}` + props._id} variant="outline-primary" class="text-center">Open Book</Button>
         </div>
-
       </Card.Body>
     </Card>
   );
