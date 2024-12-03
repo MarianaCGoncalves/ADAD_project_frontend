@@ -8,8 +8,8 @@ function BookCard(props) {
       <Card.Body>
       <Card.Img variant="top" src= {props.thumbnailUrl}/>
         <h4>{props.title}</h4>
-        <Card.Subtitle>{props.authors.join(' & ')}</Card.Subtitle>
-        <Card.Text>Categories: {props.categories.join(' ')}</Card.Text>
+        <Card.Subtitle>{props.authors && props.authors.join(' & ')}</Card.Subtitle>
+        <Card.Text>Categories: {props.categories && props.categories.join(' ')}</Card.Text>
         <Card.Text>Page Count: {props.pageCount}</Card.Text>
         <h4 class= 'text-center'>{props.price+'€'}</h4>
         <div class="col-md-12 text-center">
