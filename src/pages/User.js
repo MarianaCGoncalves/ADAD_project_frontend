@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const User = () => {
     const { id } = useParams(); // Obtém o ID do utilizador a partir da URL
+    const navigate = useNavigate(); // Hook para navegação
     const [user, setUser] = useState(null); // Estado para armazenar os dados do utilizador
     const [error, setError] = useState(null); // Estado para armazenar erros
     const [imageUrl, setImageUrl] = useState(''); // URL da imagem gerada aleatoriamente
@@ -29,6 +30,25 @@ const User = () => {
         fetchUserData();
         generateRandomImage();
     }, [id]);
+
+    const deleteUser = async () => {
+        if (window.confirm('Tem certeza que deseja eliminar este utilizador?')) {
+            try {
+                const response = await fetch(`http://localhost:3000/users/${id}`, {
+                    method: 'DELETE',
+                });
+
+                if (!response.ok) {
+                    throw new Error('Erro ao eliminar o utilizador.');
+                }
+
+                alert('Utilizador eliminado com sucesso!');
+                navigate('/users'); // Redireciona para a página principal
+            } catch (err) {
+                setError(err.message);
+            }
+        }
+    };
 
     if (error) {
         return <div>Erro: {error}</div>;
@@ -67,6 +87,11 @@ const User = () => {
             ) : (
                 <p>Nenhuma avaliação encontrada.</p>
             )}
+            <div className="mt-4 text-center">
+                <button className="btn btn-danger" onClick={deleteUser}>
+                    Eliminar Utilizador
+                </button>
+            </div>
         </div>
     );
 };
