@@ -10,7 +10,7 @@ const Book = () => {
     useEffect(() => {
         const fetchBookData = async () => {
             try {
-                const response = await fetch(⁠`http://localhost:3000/books/id/${id}`⁠);
+                const response = await fetch(`http://localhost:3000/book/id/${id}`)
                 if (!response.ok) {
                     throw new Error('Erro ao buscar os dados do livro.');
                 }
