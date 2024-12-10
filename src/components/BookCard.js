@@ -16,7 +16,7 @@ function BookCard(props) {
         <h4 class= 'text-center'>{props.price+'€'}</h4>
         <div class="col-md-12 text-center">
         <Link to={`/book/${props._id}`}>
-          <Button variant="outline-primary">Open User</Button>
+          <Button variant="outline-primary">Open Book</Button>
         </Link>
         </div>
       </Card.Body>
