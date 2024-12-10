@@ -54,17 +54,15 @@ app
 - /pages: All application pages have their matching file in this folder.
 ## Requirements for evaluation
 
-- Create /users page 
+- Create /users page feito pela Maria
 
-- Create /user/:id page
+- Create /user/:id page feito pelo Alex
 
-- Create /book/:id page
+- Create /book/:id page feito pela Loice
 
-- Edit BookCard component
+- Edit BookCard component feito pela Mariana
 
-- Inside /user/:id page create button to delete user from database
-
-
+- Inside /user/:id page create button to delete user from database feito pelo Ricardo
 
 
 ## Documentation
