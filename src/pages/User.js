@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import BookCard from '../components/BookCard';
 
 const User = () => {
     const { id } = useParams(); // Obtém o ID do utilizador a partir da URL
@@ -50,6 +51,18 @@ const User = () => {
         }
     };
 
+    const renderStars = (score) => {
+        const totalStars = 5;
+        const fullStars = Math.floor(score); // Estrelas completas
+        const emptyStars = totalStars - fullStars; // Estrelas vazias
+        return (
+            <span>
+                {'★'.repeat(fullStars)}
+                {'☆'.repeat(emptyStars)}
+            </span>
+        );
+    };
+
     if (error) {
         return <div>Erro: {error}</div>;
     }
@@ -65,28 +78,43 @@ const User = () => {
                 <img
                     src={imageUrl}
                     alt="Pessoa aleatória"
-                    style={{ width: '200px', borderRadius: '50%', marginBottom: '20px', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)' }}
+                    style={{
+                        width: '200px',
+                        borderRadius: '50%',
+                        marginBottom: '20px',
+                        boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+                    }}
                 />
             </div>
             <p><strong>ID:</strong> {user._id}</p>
             <p><strong>Nome:</strong> {user.first_name} {user.last_name}</p>
             <p><strong>Ano de Nascimento:</strong> {user.year_of_birth}</p>
             <p><strong>Profissão:</strong> {user.job}</p>
+
             <h2>Avaliações</h2>
             {user.reviews && user.reviews.length > 0 ? (
-                <ul>
-                    {user.reviews.map((review, index) => (
-                        <li key={index}>
-                            <p><strong>ID do Livro:</strong> {review.book_id}</p>
-                            <p><strong>Pontuação:</strong> {review.score}</p>
+                <div className="row">
+                    {user.reviews.map((review) => (
+                        <div key={review.book_id} className="col-md-4">
+                            <BookCard
+                            _id={review.book_id}
+                                title={review.title}
+                                authors={review.authors}
+                                categories={review.categories}
+                                pageCount={review.pageCount}
+                                price={review.price}
+                                thumbnailUrl={review.thumbnailUrl}
+                            />
+                            <p><strong>Pontuação:</strong> {review.score} {renderStars(review.score)}</p>
                             <p><strong>Recomendação:</strong> {review.recommendation ? 'Sim' : 'Não'}</p>
                             <p><strong>Data da Avaliação:</strong> {new Date(parseInt(review.review_date)).toLocaleDateString()}</p>
-                        </li>
+                        </div>
                     ))}
-                </ul>
+                </div>
             ) : (
                 <p>Nenhuma avaliação encontrada.</p>
             )}
+
             <div className="mt-4 text-center">
                 <button className="btn btn-danger" onClick={deleteUser}>
                     Eliminar Utilizador
